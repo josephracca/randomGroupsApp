@@ -14,12 +14,6 @@ let addNameBtn = document
     }
   });
 
-let generateModal = document
-  .getElementById("generateModal")
-  .addEventListener("click", function () {
-    console.log("How do you want to group?");
-  });
-
 let generateGroups = document
   .getElementById("generateGroups")
   .addEventListener("click", function () {
@@ -42,13 +36,9 @@ function updateTextInput(val) {
 
   if ((byNumPeople.checked = true)) {
     arrayNum = Math.ceil(listOfNames.length / passNumber(slider.value));
-    console.log('people' + Math.ceil(listOfNames.length / passNumber(slider.value)));
-    console.log("people");
   }
   else if ((byGroup.checked = true)) {
     arrayNum = val;
-    console.log(val);
-    console.log("group");
   }
 
   // ****needs to check to see if the ratios are good
@@ -61,7 +51,6 @@ function updateTextInput(val) {
   } else {
     let formationPlease = document.getElementById("formationPlease");
     formationPlease.innerHTML = "";
-    console.log("Here are your groups!");
     randomizer(listOfNames);
     let sortedArrays = [];
     for (let i = 0; i < arrayNum; i++) {
@@ -104,12 +93,8 @@ function addToList(namePassed) {
   if (!listOfNames.includes(namePassed)) {
     listOfNames.push(namePassed);
     localStorage.setItem("names", JSON.stringify(listOfNames));
-    console.log(`You've added a name! ${nameInput.value}`);
     addToDisplayList(nameInput.value);
   } else {
-    console.log(
-      `You've already added "${namePassed}"...please try a different name.`
-    );
   }
 }
 
@@ -167,10 +152,7 @@ function randomizer(arrayToShuffle) {
     arrayToShuffle[i] = arrayToShuffle[randomIndex];
     arrayToShuffle[randomIndex] = temp;
   }
-  console.log(arrayToShuffle);
 }
-
-console.log(listOfNames);
 
 let byGroup = document.getElementById("byGroup");
 
