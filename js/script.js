@@ -6,6 +6,7 @@ let addNameBtn = document
     //data validation for nameInput.value
     if (/^[a-zA-Z ]+$/.test(nameInput.value)) {
       addToList(nameInput.value);
+      nameInput.value = "";
     } else {
       alert(
         "Invalid character detected. Try again using ONLY spaces and letters."
@@ -23,7 +24,6 @@ let generateGroups = document
   .getElementById("generateGroups")
   .addEventListener("click", function () {
     formationPlease.innerHTML = "";
-
   });
 
 let listOfNames = JSON.parse(localStorage.getItem("names"));
@@ -36,9 +36,20 @@ slider.setAttribute("min", 2);
 slider.setAttribute("max", Math.floor(listOfNames.length / 2));
 
 function updateTextInput(val) {
-  document.getElementById('valDisplay').innerText=val;
+  document.getElementById("valDisplay").innerText = val;
 
   let arrayNum = val;
+
+  if ((byNumPeople.checked = true)) {
+    arrayNum = Math.ceil(listOfNames.length / passNumber(slider.value));
+    console.log('people' + Math.ceil(listOfNames.length / passNumber(slider.value)));
+    console.log("people");
+  }
+  else if ((byGroup.checked = true)) {
+    arrayNum = val;
+    console.log(val);
+    console.log("group");
+  }
 
   // ****needs to check to see if the ratios are good
   if (
@@ -68,16 +79,18 @@ function updateTextInput(val) {
     function printGroups() {
       let number = 1;
       sortedArrays.forEach((element) => {
-
+        let hr = document.createElement("hr");
         let div = document.createElement("div");
         div.setAttribute("id", `Group ${number}`);
-        div.classList = "row";
+        div.classList = "row groupName px-4";
         div.innerText = `Group ${number}`;
+        formationPlease.appendChild(hr);
         formationPlease.appendChild(div);
         let currentDiv = document.getElementById(`Group ${number}`);
         element.forEach((element) => {
           let colDiv = document.createElement("col");
           colDiv.innerText = element;
+          colDiv.classList = "groupNames";
           currentDiv.appendChild(colDiv);
         });
         number++;
@@ -102,7 +115,7 @@ function addToList(namePassed) {
 
 function addToDisplayList(nameToCreate) {
   let li = document.createElement("li");
-  li.classList = "list-group-item";
+  li.classList = "list-group-item blackText";
   li.innerText = nameToCreate;
   li.setAttribute("id", nameToCreate);
   listHolder.appendChild(li);
@@ -143,7 +156,7 @@ let randomNameBtn = document
     } else {
       let randomNumber = Math.floor(Math.random() * listOfNames.length);
       let randomName = listOfNames[randomNumber];
-      randomNameDisplay.innerHTML = "<h2>"+randomName+"</h2>";
+      randomNameDisplay.innerHTML = "<h2>" + randomName + "</h2>";
     }
   });
 
@@ -156,3 +169,18 @@ function randomizer(arrayToShuffle) {
   }
   console.log(arrayToShuffle);
 }
+
+console.log(listOfNames);
+
+let byGroup = document.getElementById("byGroup");
+
+function passNumber(val) {
+  return val;
+}
+let byNumPeople = document.getElementById("byNumPeople");
+function passNumberPeople(val) {
+  return Math.ceil(listOfNames.length / val);
+}
+
+let totalDisplay = document.getElementById("totalDisplay");
+totalDisplay.innerText = `Number of People in List: ${listOfNames.length}`;
