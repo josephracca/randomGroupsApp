@@ -1,0 +1,26 @@
+body {
+    background-color: rgb(11, 33, 48);
+    color: white;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.blackText{
+    color: black;
+}
+
+.navbarYellow{
+    background-color: #ffc107;
+    color: rgb(15, 49, 71);;
+    text-align: center;
+}
+
+.groupName{
+    font-weight: 700;
+}
+.groupNames{
+    font-weight:300
+}
+
+.yellow{
+    color: #ffc107;
+}
