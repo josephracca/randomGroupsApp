@@ -7,6 +7,7 @@ let addNameBtn = document
     if (/^[a-zA-Z ]+$/.test(nameInput.value)) {
       addToList(nameInput.value);
       nameInput.value = "";
+      totalDisplay.innerText = `Number of People in List: ${listOfNames.length}`;
     } else {
       alert(
         "Invalid character detected. Try again using ONLY spaces and letters."
@@ -26,8 +27,12 @@ if (listOfNames == null) {
 }
 
 let slider = document.getElementById("slider");
-slider.setAttribute("min", 2);
-slider.setAttribute("max", Math.floor(listOfNames.length / 2));
+
+const setNewMinMax = () => {
+  slider.setAttribute("min", 2);
+  slider.setAttribute("max", Math.floor(listOfNames.length / 2));
+};
+setNewMinMax();
 
 function updateTextInput(val) {
   document.getElementById("valDisplay").innerText = val;
@@ -35,9 +40,8 @@ function updateTextInput(val) {
   let arrayNum = val;
 
   if ((byNumPeople.checked = true)) {
-    arrayNum = Math.ceil(listOfNames.length / passNumber(slider.value));
-  }
-  else if ((byGroup.checked = true)) {
+    arrayNum = Math.ceil(listOfNames.length / passNumberGroup(slider.value));
+  } else if ((byGroup.checked = true)) {
     arrayNum = val;
   }
 
@@ -113,6 +117,7 @@ function addToDisplayList(nameToCreate) {
 function deleteElement(idToDelete) {
   document.getElementById(idToDelete).remove();
   updateLocal();
+  totalDisplay.innerText = `Number of People in List: ${listOfNames.length}`;
 }
 
 function deleteFromArray(param) {
@@ -156,13 +161,18 @@ function randomizer(arrayToShuffle) {
 
 let byGroup = document.getElementById("byGroup");
 
-function passNumber(val) {
+function passNumberGroup(val) {
+  // debugger;
   return val;
 }
+
 let byNumPeople = document.getElementById("byNumPeople");
+
 function passNumberPeople(val) {
+  // debugger;
   return Math.ceil(listOfNames.length / val);
 }
 
 let totalDisplay = document.getElementById("totalDisplay");
+
 totalDisplay.innerText = `Number of People in List: ${listOfNames.length}`;
