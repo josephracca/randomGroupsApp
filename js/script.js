@@ -15,6 +15,8 @@ let checkInput = () => {
         nameInput.value = "";
         totalDisplay.innerText = `Number of People in List: ${listOfNames.length}`;
         setNewMinMax();
+          valDisplay.innerText = `New Name Added!`;
+
       } else {
         alert(
           "Invalid character detected. Try again using ONLY spaces and letters."
