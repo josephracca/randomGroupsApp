@@ -1,18 +1,31 @@
 let listHolder = document.getElementById("listHolder");
 let nameInput = document.getElementById("nameInput");
+
+nameInput.addEventListener("keypress", function(e){
+  if (e.code == "Enter") {
+checkInput();
+  }
+
+});
+
+let checkInput = () => {
+      //data validation for nameInput.value
+      if (/^[a-zA-Z ]+$/.test(nameInput.value)) {
+        addToList(nameInput.value);
+        nameInput.value = "";
+        totalDisplay.innerText = `Number of People in List: ${listOfNames.length}`;
+        setNewMinMax();
+      } else {
+        alert(
+          "Invalid character detected. Try again using ONLY spaces and letters."
+        );
+      }
+}
+
 let addNameBtn = document
   .getElementById("addNameBtn")
-  .addEventListener("click", function () {
-    //data validation for nameInput.value
-    if (/^[a-zA-Z ]+$/.test(nameInput.value)) {
-      addToList(nameInput.value);
-      nameInput.value = "";
-      totalDisplay.innerText = `Number of People in List: ${listOfNames.length}`;
-    } else {
-      alert(
-        "Invalid character detected. Try again using ONLY spaces and letters."
-      );
-    }
+  .addEventListener("click", function (e) {
+    checkInput();
   });
 
 let generateGroups = document
@@ -34,15 +47,31 @@ const setNewMinMax = () => {
 };
 setNewMinMax();
 
+let valDisplay = document.getElementById("valDisplay");
+
+let setByGroups = function () {
+  valDisplay.innerHTML = `Selected: <b>by groups</b>... min.groups: ${2} max.groups: ${Math.floor(
+    listOfNames.length / 2
+  )}`;
+};
+
+let setByPeople = function () {
+  valDisplay.innerHTML = `Selected: <b>by number of people</b>... min.people: ${2} && max.people: ${Math.floor(
+    listOfNames.length / 2
+  )}`;
+};
+
 function updateTextInput(val) {
-  document.getElementById("valDisplay").innerText = val;
+  // valDisplay.innerText = val;
 
   let arrayNum = val;
 
-  if ((byNumPeople.checked = true)) {
+  if (byNumPeople.checked === true) {
     arrayNum = Math.ceil(listOfNames.length / passNumberGroup(slider.value));
-  } else if ((byGroup.checked = true)) {
+    valDisplay.innerText = `${val} people per group`;
+  } else if (byGroup.checked === true) {
     arrayNum = val;
+    valDisplay.innerText = `${val} groups`;
   }
 
   // ****needs to check to see if the ratios are good
@@ -99,6 +128,7 @@ function addToList(namePassed) {
     localStorage.setItem("names", JSON.stringify(listOfNames));
     addToDisplayList(nameInput.value);
   } else {
+    alert("That name already exists. Please try a unique name.");
   }
 }
 
