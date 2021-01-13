@@ -15,7 +15,9 @@ let checkInput = () => {
         nameInput.value = "";
         totalDisplay.innerText = `Number of People in List: ${listOfNames.length}`;
         setNewMinMax();
-          valDisplay.innerText = `New Name Added!`;
+          // valDisplay.innerText = `New Name Added!`;
+          formationPlease.innerHTML = "List has been updated!";
+
 
       } else {
         alert(
@@ -45,20 +47,20 @@ let slider = document.getElementById("slider");
 
 const setNewMinMax = () => {
   slider.setAttribute("min", 2);
-  slider.setAttribute("max", Math.floor(listOfNames.length / 2));
+  slider.setAttribute("max", Math.ceil(listOfNames.length / 2));
 };
 setNewMinMax();
 
 let valDisplay = document.getElementById("valDisplay");
 
 let setByGroups = function () {
-  valDisplay.innerHTML = `Selected: <b>by groups</b>... min.groups: ${2} max.groups: ${Math.floor(
+  valDisplay.innerHTML = `Selected: <b>by no. groups</b>... min: ${2} max: ${Math.floor(
     listOfNames.length / 2
   )}`;
 };
 
 let setByPeople = function () {
-  valDisplay.innerHTML = `Selected: <b>by number of people</b>... min.people: ${2} && max.people: ${Math.floor(
+  valDisplay.innerHTML = `Selected: <b>by no. of people</b>... min: ${2} && max: ${Math.ceil(
     listOfNames.length / 2
   )}`;
 };
@@ -149,7 +151,7 @@ function addToDisplayList(nameToCreate) {
 function deleteElement(idToDelete) {
   document.getElementById(idToDelete).remove();
   updateLocal();
-  totalDisplay.innerText = `Number of People in List: ${listOfNames.length}`;
+  totalDisplay.innerText = `Number in List: ${listOfNames.length}`;
 }
 
 function deleteFromArray(param) {
@@ -207,4 +209,4 @@ function passNumberPeople(val) {
 
 let totalDisplay = document.getElementById("totalDisplay");
 
-totalDisplay.innerText = `Number of People in List: ${listOfNames.length}`;
+totalDisplay.innerText = `Number in List: ${listOfNames.length}`;

@@ -79,22 +79,30 @@
       <div class="col">
         <hr>
         <div class="row groupName">
-          <h2 id="totalDisplay" class="yellow"> Number in List:</h2>
+          <h2 id="totalDisplay" class="yellow">Number in List:</h2>
         </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="byGroup" checked 
-            onClick="passNumberGroup(slider.value); setNewMinMax(); setByGroups();">
-          <label class="form-check-label" for="byGroup">
-            BY NO. OF GROUPS
-          </label>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="byGroup" checked
+                onClick="passNumberGroup(slider.value); setNewMinMax(); setByGroups();">
+              <label class="form-check-label" for="byGroup">
+                BY NO. OF GROUPS
+              </label>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="byNumPeople"
+                onClick="passNumberPeople(slider.value); setNewMinMax(); setByPeople();">
+              <label class="form-check-label" for="byNumPeople">
+                BY NO. OF PEOPLE
+              </label>
+            </div>
+          </div>
         </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="byNumPeople"
-            onClick="passNumberPeople(slider.value); setNewMinMax(); setByPeople();">
-          <label class="form-check-label" for="byNumPeople">
-            BY NO. OF PEOPLE
-          </label>
-        </div>
+
+
 
         <!-- <select class="form-select form-select-sm" aria-label=".form-select-sm example"> -->
         <!-- we can add these in based on array length -->
@@ -104,11 +112,15 @@
           <option value="3">Three</option>
         </select> -->
 
-        <label for="slider" class="form-label">Select Number with Slider</label>
 
-        <input id="slider" type="range" class="form-range" onchange="updateTextInput(this.value);" onClick="updateTextInput(this.value);">
-
-        <div id="valDisplay" class="div yellow text-center">[ Waiting for your selection... ]</div>
+        <div class="row text-center">
+          <input id="slider" type="range" class="form-range" onchange="updateTextInput(this.value);"
+            onClick="updateTextInput(this.value);">
+          <label for="slider" class="form-label"><i style="font-size:12px;">[ click here or slide to change number +
+              reshuffle
+              ]</i></label>
+          <div id="valDisplay" class="div yellow text-center">[ Waiting for your selection... ]</div>
+        </div>
 
         <div id="formationPlease" class="container">
           <div class="row">
